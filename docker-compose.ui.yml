@@ -1,0 +1,16 @@
+# docker-compose.ui.yml
+version: "3.8"
+
+services:
+  agent-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - AIRFLOW_API=http://host.docker.internal:8080/api/v1
+      - AIRFLOW_USER=admin
+      - AIRFLOW_PASS=admin
+    command: python ui_app.py
+    restart: unless-stopped
